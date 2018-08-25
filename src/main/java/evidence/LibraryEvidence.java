@@ -1,13 +1,14 @@
 package evidence;
 
 import model.Book;
+import model.Borrow;
 
 import java.util.*;
 
 public class LibraryEvidence {
 
-    private List<Book> availableBookList = new ArrayList<>();
-    private List<Book> lentBookList = new ArrayList<>();
+    private List<Book> bookList = new ArrayList<>();
+    private List<Borrow> borrowList = new ArrayList<>();
     private int nextBookId = 0;
 
 
@@ -19,44 +20,37 @@ public class LibraryEvidence {
     public void addNewBookToLibrary(String title, int year, String author) {
         final int bookId = this.getNextBookId();
         final Book book = new Book(bookId, title, year, author);
-        this.availableBookList.add(book);
+        this.bookList.add(book);
     }
 
     public void removeBookFromLibrary(int id) {
-        Iterator<Book> index = availableBookList.iterator();
+        Iterator<Book> index = this.bookList.iterator();
         while (index.hasNext()) {
             Book book = index.next();
-            if (book.getId() == id) {
+            if (book.getId() == id && !this.borrowList.contains(book)) {
                 index.remove();
             }
         }
     }
 
-    public void listAllBooksInLibrary() {
+    public void listLibraryBookList() {
+        int bookCount = this.bookList.size();
+        int bookBorrowedCount = this.borrowList.size();
+        int bookAvailableCount = bookCount - bookBorrowedCount;
         StringBuilder sb = new StringBuilder();
         sb.append("LIBRARY BOOK LIST:\n");
-        List<Book> bookList = this.getAllBooksInLibrary();
-        for (int index = 0; index < bookList.size(); index++) {
-            Book book = bookList.get(index);
+        for (int index = 0; index < bookCount; index++) {
+            Book book = this.bookList.get(index);
             sb.append("Book " + (index + 1) + ":\n\tid: " + book.getId() + "," + "\n\ttitle: " + book.getTitle() + ",\n\tauthor: " + book.getAuthor());
             sb.append(",\n\tavailable: ");
-            if (availableBookList.contains(book)) {
-                sb.append("yes");
-            } else {
+            if (this.borrowList.contains(book)) {
                 sb.append("no");
+            } else {
+                sb.append("yes");
             }
         }
-        sb.append("\nSUMMARY:\n- available book count: " + this.availableBookList.size() + "\n- lent book count: " + this.lentBookList.size());
+        sb.append("\nSUMMARY:\n- available book count: " + bookAvailableCount + "\n- lent book count: " + bookBorrowedCount);
         System.out.println(sb.toString());
     }
-
-    private List<Book> getAllBooksInLibrary() {
-        List<Book> bookList = new ArrayList<>();
-        bookList.addAll(this.availableBookList);
-        bookList.addAll(this.lentBookList);
-        return bookList;
-    }
-
-
 
 }

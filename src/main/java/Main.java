@@ -6,7 +6,7 @@ public class Main {
 
         LibraryEvidence ev = new LibraryEvidence();
         ev.addNewBookToLibrary("aaa", 123, "sss");
-        ev.listAllBooksInLibrary();
+        ev.listLibraryBookList();
 
     }
 
