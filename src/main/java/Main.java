@@ -5,9 +5,13 @@ public class Main {
     public static void main(String[] args){
 
         LibraryEvidence ev = new LibraryEvidence();
-        ev.addNewBookToLibrary("aaa", 123, "sss");
+        ev.addNewBookToLibrary("Pan Tadeusz", 1783, "Adam Mickiewicz");
+        ev.addNewBookToLibrary("Ogniem i Mieczem", 1812, "Henryk Sienkiewicz");
+        ev.addNewBookToLibrary("Kaczor Donald", 1212, "Walt Disney");
+        ev.lendBook(2, "Piotr Babiuch");
+        ev.removeBookFromLibrary(3);
         ev.listLibraryBookList();
-
+        ev.listBookDetailsById(2);
     }
 
 
