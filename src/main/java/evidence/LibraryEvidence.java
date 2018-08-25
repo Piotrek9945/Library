@@ -9,7 +9,7 @@ public class LibraryEvidence {
 
     private List<Book> bookList = new ArrayList<>();
     private List<Borrow> borrowList = new ArrayList<>();
-    private int nextBookId = 0;
+    private static int nextBookId = 0;
 
 
     private int getNextBookId() {
@@ -104,5 +104,33 @@ public class LibraryEvidence {
             sb.append(",\n\tborrower name: " + borrow.getBorrowerName());
         }
         System.out.println(sb.toString());
+    }
+
+
+    /**
+     * Only one any parameter is required. Other parameters are optional and should be set null.
+     * Passing several parameters, result will be given with the conjunction of parameters.
+     *
+     * @param title
+     * @param year
+     * @param author
+     */
+    public Book searchBook(String title, Integer year, String author) {
+        if (title == null && year == null && author == null) {
+            return null;
+        }
+        for (Book book : this.bookList) {
+            if (title != null && !title.equals(book.getTitle())) {
+                continue;
+            }
+            if (year != null && !year.equals(book.getYear())) {
+                continue;
+            }
+            if (author != null && !author.equals(book.getAuthor())) {
+                continue;
+            }
+            return book;
+        }
+        return null;
     }
 }
