@@ -2,44 +2,31 @@ package model;
 
 public class Book {
 
-    private Integer id;
+    private int id;
     private String title;
-    private Integer year;
+    private int year;
     private String author;
 
-    public Book(int id) {
+    public Book(int id, String title, int year, String author) {
         this.id = id;
+        this.title = title;
+        this.year = year;
+        this.author = author;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getYear() {
+    public int getYear() {
         return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
     }
 
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 }
