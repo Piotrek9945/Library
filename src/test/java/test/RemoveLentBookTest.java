@@ -1,28 +1,30 @@
 package test;
 
 import app.Library;
+import model.Book;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.core.IsSame.sameInstance;
+import static org.junit.Assert.assertThat;
 
 public class RemoveLentBookTest {
 
     Library tester = new Library();
-    int bookId = 0;
+    Book book;
 
     @Before
     public void addNewBook() {
-        this.bookId = tester.addNewBookToLibrary("test dsa", 123, "bgfdbb").getId();
-        tester.lendBook(this.bookId, "asd");
+        book = tester.addNewBookToLibrary("test dsa", 123, "bgfdbb");
     }
 
     @Test
-    public void removeLentBookShouldReturnFalse() {
-        assertFalse(tester.removeBookFromLibrary(this.bookId));
+    public void removeLentBookFromLibraryShouldNotRemoveABookFromBookList() {
+        int bookId = book.getId();
+        tester.lendBook(bookId, "Jan");
+        tester.removeBookFromLibrary(bookId);
+        Book bookFromList = tester.findBookInBookListById(bookId);
+        assertThat(bookFromList, sameInstance(this.book));
     }
-
-
 
 }

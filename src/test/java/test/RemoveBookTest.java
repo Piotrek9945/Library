@@ -5,23 +5,25 @@ import model.Book;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 public class RemoveBookTest {
 
     Library tester = new Library();
-    int bookId = 0;
+    Book book;
 
     @Before
     public void addNewBook() {
-        Book book = tester.addNewBookToLibrary("test dsa", 123, "bgfdbb");
-        this.bookId = book.getId();
+        book = tester.addNewBookToLibrary("test dsa", 123, "bgfdbb");
     }
 
     @Test
-    public void removeBookShouldReturnTrue() {
-        assertTrue(tester.removeBookFromLibrary(this.bookId));
+    public void removeBookFromLibraryShouldRemoveABookFromBookList() {
+        int bookId = book.getId();
+        tester.removeBookFromLibrary(bookId);
+        Book bookFromList = tester.findBookInBookListById(bookId);
+        assertThat(bookFromList, equalTo(null));
     }
 
 }

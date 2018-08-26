@@ -11,6 +11,29 @@ public class Library {
     private List<Borrow> borrowList = new ArrayList<>();
     private static int nextBookId = 0;
 
+    public List<Book> getBookList() {
+        return this.bookList;
+    }
+
+    public Book findBookInBookListById(int id) {
+        Book foundBook = null;
+        for(Book book : bookList) {
+            if (book.getId() == id) {
+                foundBook = book;
+            }
+        }
+        return foundBook;
+    }
+
+    public Borrow findBorrowInBorrowListByBookId(int id) {
+        Borrow foundBorrow = null;
+        for(Borrow borrow : borrowList) {
+            if (borrow.getBookId() == id) {
+                foundBorrow = borrow;
+            }
+        }
+        return foundBorrow;
+    }
 
     private int getNextBookId() {
         this.nextBookId++;
@@ -42,6 +65,7 @@ public class Library {
         if (book != null && isLent == false) {
             Borrow borrow = new Borrow(id, borrowerName);
             this.borrowList.add(borrow);
+            return borrow;
         }
         return null;
     }
