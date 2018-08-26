@@ -1,11 +1,11 @@
-package evidence;
+package app;
 
 import model.Book;
 import model.Borrow;
 
 import java.util.*;
 
-public class LibraryEvidence {
+public class Library {
 
     private List<Book> bookList = new ArrayList<>();
     private List<Borrow> borrowList = new ArrayList<>();
@@ -17,29 +17,33 @@ public class LibraryEvidence {
         return nextBookId;
     }
 
-    public void addNewBookToLibrary(String title, int year, String author) {
+    public Book addNewBookToLibrary(String title, int year, String author) {
         final int bookId = this.getNextBookId();
         final Book book = new Book(bookId, title, year, author);
         this.bookList.add(book);
+        return book;
     }
 
-    public void removeBookFromLibrary(int id) {
+    public boolean removeBookFromLibrary(int id) {
         Iterator<Book> index = this.bookList.iterator();
         while (index.hasNext()) {
             Book book = index.next();
-            if (book.getId() == id && !this.borrowList.contains(book)) {
+            if (book.getId() == id && this.getBorrowByBookId(book.getId()) == null) {
                 index.remove();
+                return true;
             }
         }
+        return false;
     }
 
-    public void lendBook(int id, String borrowerName) {
+    public Borrow lendBook(int id, String borrowerName) {
         Book book = getBookById(id);
         boolean isLent = isBookLent(id);
         if (book != null && isLent == false) {
             Borrow borrow = new Borrow(id, borrowerName);
             this.borrowList.add(borrow);
         }
+        return null;
     }
 
     private Book getBookById(int id) {
