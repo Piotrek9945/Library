@@ -11,10 +11,6 @@ public class Library {
     private List<Borrow> borrowList = new ArrayList<>();
     private static int nextBookId = 0;
 
-    public List<Book> getBookList() {
-        return this.bookList;
-    }
-
     public Book findBookInBookListById(int id) {
         Book foundBook = null;
         for(Book book : bookList) {
@@ -25,22 +21,12 @@ public class Library {
         return foundBook;
     }
 
-    public Borrow findBorrowInBorrowListByBookId(int id) {
-        Borrow foundBorrow = null;
-        for(Borrow borrow : borrowList) {
-            if (borrow.getBookId() == id) {
-                foundBorrow = borrow;
-            }
-        }
-        return foundBorrow;
-    }
-
     private int getNextBookId() {
         this.nextBookId++;
         return nextBookId;
     }
 
-    public Book addNewBookToLibrary(String title, int year, String author) {
+    public Book addNewBookToLibrary(String title, Integer year, String author) {
         final int bookId = this.getNextBookId();
         final Book book = new Book(bookId, title, year, author);
         this.bookList.add(book);

@@ -6,7 +6,8 @@ import test.*;
 @Suite.SuiteClasses({
        RemoveBookTest.class,
        RemoveLentBookTest.class,
-       SearchBookInLibraryTest.class,
+       SearchExistingBookInLibraryTest.class,
+       SearchNotExistingBookInLibraryTest.class,
 })
 public class LibraryTestSuite {
 

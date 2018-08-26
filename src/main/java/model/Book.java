@@ -4,10 +4,10 @@ public class Book {
 
     private int id;
     private String title;
-    private int year;
+    private Integer year;
     private String author;
 
-    public Book(int id, String title, int year, String author) {
+    public Book(int id, String title, Integer year, String author) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -22,7 +22,7 @@ public class Book {
         return title;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 

@@ -15,7 +15,7 @@ public class RemoveLentBookTest {
 
     @Before
     public void addNewBook() {
-        book = tester.addNewBookToLibrary("test dsa", 123, "bgfdbb");
+        book = tester.addNewBookToLibrary("Pan Tadeusz" , 1732, "Adam Mickiewicz");
     }
 
     @Test
